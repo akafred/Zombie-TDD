@@ -1,19 +1,20 @@
-/*jslint newcap:false */
+/*jslint newcap:true, bitwise:true, nomen:true, onevar:true, plusplus:true, regexp:true */
 
 var ZOMBIE = this.ZOMBIE || {};
 
 (function () {
 
     function validate(shape) {
+        var row;
         if (!shape) {
             throw new TypeError("shape must be array");    
         }
         if (!shape.length || !shape[0].length) {
             throw { name: "ArgumentError", message: "shape cannot be empty" };
         }
-        for (var row = 0; row < shape.length; row++) {
+        for (row = 0; row < shape.length; row += 1) {
             if (shape[row].length !== shape[0].length) {
-                throw  { name: "ArgumentError", message: "shape strings must be of equal length" };
+                throw { name: "ArgumentError", message: "shape strings must be of equal length" };
             }
         }
     }
@@ -30,16 +31,18 @@ var ZOMBIE = this.ZOMBIE || {};
     }
     
     function columns() {
-        var result = [];
-        for (var col = 0; col < this.width(); col++) {
+        var result = [],
+            col;
+        for (col = 0; col < this.width(); col += 1) {
             result.push(this.column(col));
         }
         return result;
     }
 
     function column(col) {
-        var result = "";
-        for (var row = 0; row < this.shape.length; row++) {
+        var result = "",
+            row;
+        for (row = 0; row < this.shape.length; row += 1) {
             result = result + this.shape[row][col];
         }
         return result;        
@@ -57,4 +60,4 @@ var ZOMBIE = this.ZOMBIE || {};
         width: width,
         rotate90: rotate90
     };
-} ());
+}());

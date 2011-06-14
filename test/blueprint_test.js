@@ -1,4 +1,4 @@
-/*jslint newcap:false */
+/*jslint newcap:false, bitwise:true, nomen:true, onevar:true, plusplus:true, regexp:true */
 /*globals TestCase, ZOMBIE, assertEquals, assertException, assertObject, assertPrototypeOf, sinon */
 
 (function (blueprint) {
@@ -15,8 +15,8 @@
 
         "test should have shape": function () {
             var shape = ['***',
-                         '***'];
-            var bp = blueprint.create(shape);
+                         '***'],
+                bp = blueprint.create(shape);
             assertEquals(shape, bp.shape);
         },
 
