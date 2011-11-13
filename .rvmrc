@@ -1,0 +1,4 @@
+rvm 1.9.2@jstest --create
+
+export JSTESTDRIVER_HOME=lib
+
