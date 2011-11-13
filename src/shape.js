@@ -4,30 +4,33 @@ var ZOMBIE = this.ZOMBIE || {};
 
 (function () {
 
-    function validate(shape) {
+    function validate(rows) {
         var row;
-        if (!shape) {
+        if (!rows) {
             throw new TypeError("shape must be array");    
         }
-        if (!shape.length || !shape[0].length) {
+        if (!rows.length || !rows[0].length) {
             throw { name: "ArgumentError", message: "shape cannot be empty" };
         }
-        for (row = 0; row < shape.length; row += 1) {
-            if (shape[row].length !== shape[0].length) {
+        for (row = 0; row < rows.length; row += 1) {
+            if (rows[row].length !== rows[0].length) {
                 throw { name: "ArgumentError", message: "shape strings must be of equal length" };
             }
         }
     }
     
-    function create(shape) {
-        validate(shape);
+    function create(rows) {
+        validate(rows);
         var self = Object.create(this);
-        self.shape = shape;
+        self.rows = rows;
         return self;
     }
 
+	function toArray() {
+		return this.rows;
+	}
     function width() {
-        return this.shape[0].length;
+        return this.rows[0].length;
     }
     
     function columns() {
@@ -42,19 +45,19 @@ var ZOMBIE = this.ZOMBIE || {};
     function column(col) {
         var result = "",
             row;
-        for (row = 0; row < this.shape.length; row += 1) {
-            result = result + this.shape[row][col];
+        for (row = 0; row < this.rows.length; row += 1) {
+            result = result + this.rows[row][col];
         }
         return result;        
     }
 
     function rotate90() {
-        this.shape = this.columns().reverse();
-        return this;
+        return this.create(this.columns().reverse());
     }
 
-    ZOMBIE.blueprint = {
+    ZOMBIE.shape = {
         create: create,
+		toArray: toArray,
         columns: columns,
         column: column,
         width: width,
