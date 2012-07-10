@@ -1,13 +1,12 @@
-/*jslint newcap:true, bitwise:true, nomen:true, onevar:true, plusplus:true, regexp:true */
+/*jslint sloppy: true, bitwise: true, nomen: true, plusplus: true, regexp: true */
 
 var ZOMBIE = this.ZOMBIE || {};
 
 (function () {
-
     function validate(rows) {
         var row;
         if (!rows) {
-            throw new TypeError("shape must be array");    
+            throw new TypeError("shape must be array");
         }
         if (!rows.length || !rows[0].length) {
             throw { name: "ArgumentError", message: "shape cannot be empty" };
@@ -18,7 +17,7 @@ var ZOMBIE = this.ZOMBIE || {};
             }
         }
     }
-    
+
     function create(rows) {
         validate(rows);
         var self = Object.create(this);
@@ -29,10 +28,11 @@ var ZOMBIE = this.ZOMBIE || {};
 	function toArray() {
 		return this.rows;
 	}
+
     function width() {
         return this.rows[0].length;
     }
-    
+
     function columns() {
         var result = [],
             col;
@@ -48,7 +48,7 @@ var ZOMBIE = this.ZOMBIE || {};
         for (row = 0; row < this.rows.length; row += 1) {
             result = result + this.rows[row][col];
         }
-        return result;        
+        return result;
     }
 
     function rotate90() {

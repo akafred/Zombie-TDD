@@ -1,8 +1,11 @@
-/*jslint newcap:false, bitwise:true, nomen:true, onevar:true, plusplus:true, regexp:true */
+/*jslint bitwise: true, nomen: true, plusplus: true, regexp: true*/
 /*globals TestCase, ZOMBIE, assertEquals, assertException, assertObject, assertPrototypeOf, sinon */
 
 (function (shape) {
-    TestCase("ShapeTest", sinon.testCase({
+    "use strict";
+    var testCase = TestCase;
+
+    testCase("ShapeTest", sinon.testCase({
 
         "test should be an object": function () {
             assertObject(shape);
@@ -25,13 +28,13 @@
                 shape.create();
             });
         },
-        
+
         "test should complain about empty shape": function () {
             assertException(function () {
                 shape.create([]);
             });
         },
-        
+
         "test should complain about irregular shape": function () {
             assertException(function () {
                 shape.create(['*', '']);
@@ -41,23 +44,23 @@
         "test should return columns": function () {
             var aShape = shape.create(['* ',
                                        '**']);
-            assertEquals(['**', ' *'], aShape.columns());            
+            assertEquals(['**', ' *'], aShape.columns());
         },
-        
+
         "test should have return correct width": function () {
             var aShape = shape.create(['**']);
             assertEquals(2, aShape.width());
         }
-        
+
     }));
 
     function assertRotation(before, after) {
-        var aShape = shape.create(before), 
+        var aShape = shape.create(before),
 			newShape = aShape.rotate90();
         assertEquals(after, newShape.toArray());
     }
 
-    TestCase("ShapeRotateTest", sinon.testCase({
+    testCase("ShapeRotateTest", sinon.testCase({
         "test should rotate single cell": function () {
             assertRotation(['*'], ['*']);
         },
@@ -69,15 +72,15 @@
         "test should rotate horizontal line": function () {
             assertRotation(['**'], ['*', '*']);
         },
-        
+
         "test should rotate L-shape": function () {
             assertRotation(["**", "* "], ["* ", "**"]);
         },
-        
+
         "test should rotate T-shape": function () {
             assertRotation(["***",
                             " * ",
-                            " * "], 
+                            " * "],
                            ["*  ",
                             "***",
                             "*  "]);
