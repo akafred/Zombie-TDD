@@ -6,19 +6,6 @@ AKAFRED.xhr = AKAFRED.xhr || {};
 
 (function () {
     "use strict";
-    var xhr = AKAFRED.xhr;
-
-    function get(url) {
-        if (typeof url !== "string") {
-            throw new TypeError("URL must be provided");
-        }
-        var transport = xhr.create();
-    }
-    xhr.get = get;
-}());
-
-(function () {
-    "use strict";
     var xhr, i, l,
         options = [
             function () {
@@ -41,3 +28,17 @@ AKAFRED.xhr = AKAFRED.xhr || {};
         } catch (e) {}
     }
 }());
+
+(function () {
+    "use strict";
+    var xhr = AKAFRED.xhr;
+
+    function get(url) {
+        if (typeof url !== "string") {
+            throw new TypeError("URL must be provided");
+        }
+        var transport = xhr.create();
+    }
+    xhr.get = get;
+}());
+
