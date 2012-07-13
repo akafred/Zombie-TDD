@@ -1,5 +1,5 @@
-/*globals TestCase, AKAFRED, tddjs, sinon,
-  assert, assertNumber, assertEquals, assertFunction, assertException, assertObject, assertPrototypeOf */
+/*globals TestCase, AKAFRED, tddjs, stubFn, sinon,
+ assert, assertNumber, assertEquals, assertFunction, assertException, assertObject, assertPrototypeOf */
 
 (function () {
     "use strict";
@@ -32,14 +32,16 @@
                 xhr.get();
             }, "TypeError");
         },
-        "test should obtain an XMLHttpRequest object": function () {
-            xhr.create = function () {
-                xhr.create.called = true;
-            };
+        "test should call open with method, url, async flag": function () {
+            var url, openStub = stubFn();
 
-            xhr.get("/url");
+            xhr.create = stubFn({
+                open: openStub
+            });
+            url = "/url";
+            xhr.get(url);
 
-            assert(xhr.create.called);
+            assertEquals(["GET", url, true], openStub.args);
         }
     });
 }());

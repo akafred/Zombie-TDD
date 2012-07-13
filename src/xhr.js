@@ -38,6 +38,7 @@ AKAFRED.xhr = AKAFRED.xhr || {};
             throw new TypeError("URL must be provided");
         }
         var transport = xhr.create();
+        transport.open("GET", url, true);
     }
     xhr.get = get;
 }());
