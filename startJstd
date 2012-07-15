@@ -1,0 +1,8 @@
+
+export JSTESTDRIVER_HOME=`pwd`/lib
+
+jstestdriver --port 4224 &
+sleep 6
+open "http://localhost:4224/capture"
+jsautotest
+
